@@ -1,0 +1,129 @@
+import React, {Component} from 'react';
+import {View, TextInput, Button, Text, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import uuid from 'uuid';
+
+const DismissKeyboard = ({ children }) =>{
+  return(
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+  )
+}
+
+class IdeaModal extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      id: uuid.v4(),
+      title: "",
+      description: "",
+      notInterestedCount: 0,
+      interestedCount: 0,
+      veryInterestedCount: 0,
+      notes: [],
+      waitList: []
+    }
+  }
+
+  resetState = () =>{
+    this.state = {
+      id: uuid.v4(),
+      title: "",
+      description: "",
+      notInterestedCount: 0,
+      interestedCount: 0,
+      veryInterestedCount: 0,
+      notes: [],
+      waitList: []
+    }
+  }
+
+  render() {
+    return (
+      <DismissKeyboard>
+        <View>
+          <Text style={styles.header}>Add an Idea</Text>
+          <Text style={styles.label}>Idea Title</Text>
+          <View style={styles.input}>
+            <TextInput placeholder="Place Title Here"
+                      onChangeText={(text) => {
+                        this.setState({title: text});
+
+                    }}
+                      autoCapitalize="words"></TextInput>
+          </View>
+          <Text style={styles.label}>Idea Description</Text>
+          <View style={styles.input}>
+            <TextInput style={styles.multiLine}
+                      placeholder="Place Description Here"
+                      multiline={true}
+                      onChangeText={(text) => this.setState({description: text})}></TextInput>
+          </View>
+          <View style={styles.horizontal}>
+            <View style={styles.button}>
+              <Button title="Add"
+                      color="#18D470"
+                      onPress={() => {
+                        this.props.addItem(this.state);
+                        this.resetState();
+                        this.props.setModalVisible(false);
+                      }}></Button>
+            </View>
+            <View style={styles.button}>
+              <Button title="Cancel"
+                      color="#C82333"
+                      onPress={() => {
+                        this.resetState();
+                        this.props.setModalVisible(false);
+                      }}
+                      ></Button>
+            </View>
+          </View>
+        </View>
+      </DismissKeyboard>
+    );
+  }
+}
+const styles = StyleSheet.create({
+  header:{
+    fontSize: 20,
+    fontWeight: "bold",
+    backgroundColor: "#18D470",
+    textAlign: "center",
+    color: "white",
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  label:{
+    fontSize: 15,
+    fontWeight: "bold",
+    marginTop: 25,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom:5
+  },
+  input:{
+    borderWidth: 1,
+    borderColor: "#c4c4c4",
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 5,
+    borderRadius: 5
+  },
+  button:{
+    flex:1,
+  },
+  multiLine:{
+    height: 125,
+    textAlignVertical: 'top'
+  },
+  horizontal:{
+    flexDirection: "row",
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent:'center',
+  }
+});
+
+export {IdeaModal};
