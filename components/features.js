@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {ListItem} from './listItem';
 import {Footer} from './listscreenfooter';
 
 class Features extends Component {
+
   static navigationOptions = {
     title: 'Features',
     headerStyle: {
@@ -12,27 +14,100 @@ class Features extends Component {
     headerTitleStyle:{
       color: "white"
     },
-  } 
+  }
 
   constructor(props){
     super(props);
 
-    this.features = props.navigation.state.params.features;
+    this.state = {
+      features: []
+    }
+
+    this.loadFeatures();
+    
+  }
+
+  saveFeatures = () => {
+    AsyncStorage.setItem("Features", JSON.stringify(this.state.features));
+  }
+
+  loadFeatures = () => {
+    AsyncStorage.getItem("Features", (err, data) => {
+      if (err){
+        console.error('Error loading features', err);
+      } else {
+        let featuresList = JSON.parse(data);
+        if(featuresList === null || featuresList === undefined){
+          featuresList = [];
+        }
+        this.setState({features: featuresList});
+      }
+      
+      
+    });
+    
   }
 
   addFeature = (feature) => {
-    this.setState({features: [...this.state.features, features]})
+    if(feature.title !== ""){
+      let arr = Array.from(this.state.features);
+      arr.push(feature);
+      console.log(feature);
+      this.setState({features: arr}, ()=>{
+        this.saveFeatures();
+      });
+    } else {
+      console.log(feature); 
+    }
+    
   }
-  
+
+  removeFeature = (feature) => {
+    this.setState( {features: Array.from(this.state.features.filter((arrFeature) => {
+      return arrFeature.id !== feature.id;
+    }))}, () => {
+      this.saveFeatures();
+    });
+    
+  }
+
+  updateFeature = (feature, note, selectionIndex) => {
+    this.setState( {features: Array.from(this.state.features.filter((arrFeature) => {
+      return arrFeature.id !== feature.id;
+    }))}, () => {
+      if(note !== '' && note !== null){
+        feature.notes.push(note);
+      }
+      switch(selectionIndex){
+        case 0: feature.notInterestedCount += 1;
+                break;
+        case 1: feature.interestedCount += 1;
+                break;
+        case 2: feature.veryInterestedCount += 1;
+                break;
+      }
+      
+      this.addFeature(feature);
+    });
+  }
+
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.featureContainer}>
-        <ScrollView>
-          {this.features.map((feature) => {
-            return (<ListItem key={feature.id} item={feature}></ListItem>)
-          })}
-        </ScrollView>
-        <Footer addFeature={this.addFeature}></Footer>
+        <FlatList data={this.state.features} 
+                  keyExtractor={(feature, index) => { return (feature.id)}}
+                  renderItem={(feature) => (
+          <TouchableOpacity  onPress={() => navigate("featureDetail", {"feature": feature, "updateFeature": this.updateFeature})}>
+            <ListItem item={feature}
+                      removeItem={this.removeFeature}
+                      
+              ></ListItem>
+            </TouchableOpacity>
+        )}>
+
+        </FlatList>
+        <Footer addFeature={this.addFeature} pageId="features"></Footer>
       </View>
     );
   }

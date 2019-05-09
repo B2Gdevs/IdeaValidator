@@ -3,15 +3,16 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 class Data extends Component {
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={[styles.container, styles.horizontal]}>
         <View style={styles.features}>
-          <TouchableOpacity onPress={() => this.props.navigate("Features")} style={[styles.rounded, styles.roundedFeatures]}>
+          <TouchableOpacity onPress={() => navigate("dataFeatures")} style={[styles.rounded, styles.roundedFeatures]}>
             <Text style={[styles.roundedText, styles.featuresText]}>Features</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.ideasEvents} >
-          <TouchableOpacity onPress={() => this.props.navigate("Ideas")} style={[styles.rounded, styles.roundedIdeas]}>
+          <TouchableOpacity onPress={() => navigate("dataIdeas")} style={[styles.rounded, styles.roundedIdeas]}>
             <Text style={[styles.roundedText, styles.ideasText]}>Ideas and Events</Text>
           </TouchableOpacity>
         </View>

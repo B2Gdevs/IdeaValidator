@@ -37,8 +37,10 @@ class Ideas extends Component {
         console.error('Error loading ideas', err);
       } else {
         let ideasList = JSON.parse(data);
+        if(ideasList === null || ideasList === undefined){
+          ideasList = [];
+        }
         this.setState({ideas: ideasList});
-        console.log(this.state.ideas);
       }
     });
     
@@ -47,6 +49,7 @@ class Ideas extends Component {
   addIdea = (idea) => {
     if(idea.title !== ""){
       let arr = Array.from(this.state.ideas);
+      console.log(idea);
       arr.push(idea);
       this.setState({ideas: arr}, ()=>{
         this.saveIdeas();
@@ -66,7 +69,7 @@ class Ideas extends Component {
     
   }
 
-  updateIdea = (idea, note, email) => {
+  updateIdea = (idea, note, email, selectedIndex) => {
     this.setState( {ideas: Array.from(this.state.ideas.filter((arridea) => {
       return arridea.id !== idea.id;
     }))}, () => {
@@ -76,6 +79,16 @@ class Ideas extends Component {
       if(email !== '' && email !== null){
         idea.waitList.push(email);
       }
+
+      switch(selectedIndex){
+        case 0: idea.notInterestedCount += 1;
+                break;
+        case 1: idea.interestedCount += 1;
+                break;
+        case 2: idea.veryInterestedCount += 1;
+                break;
+      }
+
       this.addIdea(idea);
     });
   }

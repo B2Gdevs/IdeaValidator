@@ -3,6 +3,7 @@ import {StyleSheet, View, Modal, TextInput, Button} from 'react-native';
 import {Icon} from 'react-native-elements';
 import uuid from 'uuid';
 import {IdeaModal} from './ideaModal';
+import {FeatureModal} from './featureModal';
 
 class Footer extends Component {
 
@@ -15,6 +16,10 @@ class Footer extends Component {
       featurePage: false
     };
 
+    
+  }
+
+  componentWillMount(){
     this.checkPage(this.props.pageId);
   }
 
@@ -24,9 +29,9 @@ class Footer extends Component {
 
   checkPage = (string) =>{
     switch(string){
-      case "ideas": this.state.ideaPage = true;
+      case "ideas": this.setState({ideaPage: true});
                     break;
-      case "features": this.state.featurePage = true;
+      case "features": this.setState({featurePage: true});
                        break;
     }
   }
@@ -35,7 +40,7 @@ class Footer extends Component {
     if(this.state.ideaPage){
       return (<IdeaModal addItem={this.props.addIdea} setModalVisible={this.setModalVisible}></IdeaModal>)
     } else{
-
+      return (<FeatureModal addItem={this.props.addFeature} setModalVisible={this.setModalVisible}></FeatureModal>)
     }
   }
 

@@ -87,6 +87,7 @@ class IdeaDetail extends Component {
               <TextInput style={[styles.multiLine, styles.inputText]}
                           placeholder="Place Description Here"
                           returnKeyType="done"
+                          blurOnSubmit={true}
                           placeholderTextColor="#717171"
                           multiline={true}
                           onChangeText={(text) => this.setState({description: text})}>{this.state.idea.description}</TextInput>
@@ -107,6 +108,7 @@ class IdeaDetail extends Component {
                           placeholder="Example: Only interested in the idea if selfies are involved."
                           multiline={true}
                           returnKeyType="done"
+                          blurOnSubmit={true}
                           placeholderTextColor="#717171"
                           onChangeText={(text) => {
                             this.setState({note: text});
@@ -134,7 +136,7 @@ class IdeaDetail extends Component {
                         onPress={() => {
                           let string = this.getInterestString(this.state.selectedInterestIndex);
                           string = string.concat(this.state.note);
-                          this.props.navigation.state.params.updateIdea(this.state.idea, string, this.state.email);
+                          this.props.navigation.state.params.updateIdea(this.state.idea, string, this.state.email, this.state.selectedInterestIndex);
                           this.props.navigation.goBack();
                         }}
                 ></Button>
@@ -168,7 +170,6 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginLeft: 15,
     marginRight: 15,
-    marginBottom:5,
     color: textColor
   },
   input:{
@@ -176,7 +177,6 @@ const styles = StyleSheet.create({
     borderColor: "#c4c4c4",
     marginLeft: 15,
     marginRight: 15,
-    marginBottom: 5,
     borderRadius: 5,
   },
   inputText:{
@@ -191,14 +191,14 @@ const styles = StyleSheet.create({
   },
   horizontal:{
     flexDirection: "row",
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 25,
+    marginBottom: 25,
     alignItems: "center",
     justifyContent:'center',
   },
   interestedContainer:{
     borderWidth: 0,
-    marginTop: 15
+    marginTop: 25
   },
   interestedBorder:{
     color: "#373737"

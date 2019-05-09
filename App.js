@@ -12,9 +12,11 @@ import {createStackNavigator, createAppContainer} from 'react-navigation';
 import {Ideas} from './components/ideas';
 import {Features} from './components/features';
 import {Data} from './components/data';
+import {IdeaDetail} from './components/ideaDetail';
+import {FeatureDetail} from './components/featureDetail';
 // import {Ideas} from './components/dataideas';
 import {DataFeatures} from './components/datafeatures';
-import {IdeaDetail} from './components/ideaDetail';
+import {DataFeatureDetail} from './components/dataFeatureDetail';
 
 class Home extends Component {
 
@@ -79,6 +81,7 @@ class Home extends Component {
     );
   }
 }
+import { from } from 'rxjs';
 
 const styles = StyleSheet.create({
   container: {
@@ -143,7 +146,9 @@ const MainNavigator = createStackNavigator({
   Features: {screen: Features},
   Data: {screen: Data},
   dataFeatures: {screen: DataFeatures},
-  ideaDetail: {screen: IdeaDetail}
+  ideaDetail: {screen: IdeaDetail},
+  featureDetail: {screen: FeatureDetail},
+  dataFeatureDetail: {screen: DataFeatureDetail}
 },
 {
   headerLayoutPreset: 'center'

@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {View, TextInput, Button, Text, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import uuid from 'uuid';
 
+let textColor = "white";
+
 const DismissKeyboard = ({ children }) =>{
   return(
-  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+  <TouchableWithoutFeedback style={{flex: 1}} onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
   )
@@ -42,22 +44,27 @@ class IdeaModal extends Component {
   render() {
     return (
       <DismissKeyboard>
-        <View>
+        <View style={styles.container}>
           <Text style={styles.header}>Add an Idea</Text>
           <Text style={styles.label}>Idea Title</Text>
           <View style={styles.input}>
-            <TextInput placeholder="Place Title Here"
+            <TextInput 
+                      style={styles.inputText}
+                      placeholder="Place Title Here"
+                      placeholderTextColor="#717171"
                       onChangeText={(text) => {
                         this.setState({title: text});
 
-                    }}
+                      }}
                       autoCapitalize="words"></TextInput>
           </View>
           <Text style={styles.label}>Idea Description</Text>
           <View style={styles.input}>
-            <TextInput style={styles.multiLine}
+            <TextInput style={[styles.multiLine, styles.inputText]}
                       placeholder="Place Description Here"
+                      placeholderTextColor="#717171"
                       multiline={true}
+                      blurOnSubmit={true}
                       onChangeText={(text) => this.setState({description: text})}></TextInput>
           </View>
           <View style={styles.horizontal}>
@@ -86,6 +93,10 @@ class IdeaModal extends Component {
   }
 }
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    backgroundColor: "#373737"
+  },
   header:{
     fontSize: 20,
     fontWeight: "bold",
@@ -101,7 +112,8 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginLeft: 15,
     marginRight: 15,
-    marginBottom:5
+    marginBottom:5,
+    color: textColor
   },
   input:{
     borderWidth: 1,
@@ -110,6 +122,9 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginBottom: 5,
     borderRadius: 5
+  },
+  inputText:{
+    color: textColor
   },
   button:{
     flex:1,

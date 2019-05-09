@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, ScrollView, ListView} from 'react-native';
-import {ListItem} from './listItem';
-import {Footer} from './listscreenfooter';
+import {StyleSheet, View, FlatList, TouchableOpacity, Text} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {DataItem} from './dataItem';
 
 class DataFeatures extends Component {
+
   static navigationOptions = {
     title: 'Features',
     headerStyle: {
@@ -17,23 +18,56 @@ class DataFeatures extends Component {
   constructor(props){
     super(props);
 
-    this.ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    })
-
     this.state = {
-      features: this.ds.cloneWithRows(props.navigation.state.params.features)
+      features: []
     }
+
+    this.loadFeatures();
+    
   }
+
+  saveFeatures = () => {
+    AsyncStorage.setItem("Features", JSON.stringify(this.state.features));
+  }
+
+  loadFeatures = () => {
+    AsyncStorage.getItem("Features", (err, data) => {
+      if (err){
+        console.error('Error loading features', err);
+      } else {
+        let featuresList = JSON.parse(data);
+        if(featuresList === null || featuresList === undefined){
+          featuresList = [];
+        }
+        this.setState({features: featuresList});
+      }
+      
+    });
+  
+  }
+
+
+  exportData = (feature) => {
+    // create excel sheet for feature
+    return (feature);
+  }
+
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.featureContainer}>
-        <ListView>
-          {this.state.features.map((feature) => {
-            return (<ListItem key={feature.id} item={feature}></ListItem>)
-          })}
-        </ListView>
-        <Footer></Footer>
+        <FlatList data={this.state.features} 
+                  keyExtractor={(feature, index) => { return (feature.id)}}
+                  renderItem={(feature) => (
+          <TouchableOpacity  onPress={() => navigate("dataFeatureDetail", {"feature": feature})}>
+            <DataItem item={feature}
+                      removeItem={this.removeFeature}
+                      
+              ></DataItem>
+            </TouchableOpacity>
+        )}>
+
+        </FlatList>
       </View>
     );
   }
