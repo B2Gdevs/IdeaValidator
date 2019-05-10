@@ -49,8 +49,7 @@ class Ideas extends Component {
   addIdea = (idea) => {
     if(idea.title !== ""){
       let arr = Array.from(this.state.ideas);
-      console.log(idea);
-      arr.push(idea);
+      arr.unshift(idea);
       this.setState({ideas: arr}, ()=>{
         this.saveIdeas();
       });

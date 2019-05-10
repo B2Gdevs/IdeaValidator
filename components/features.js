@@ -51,8 +51,7 @@ class Features extends Component {
   addFeature = (feature) => {
     if(feature.title !== ""){
       let arr = Array.from(this.state.features);
-      arr.push(feature);
-      console.log(feature);
+      arr.unshift(feature);
       this.setState({features: arr}, ()=>{
         this.saveFeatures();
       });

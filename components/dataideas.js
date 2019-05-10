@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, View} from 'react-native';
-import {ListItem} from './listItem';
-import {Footer} from './listscreenfooter';
+import {StyleSheet, View, FlatList, TouchableOpacity, Text} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {DataItem} from './dataItem';
 
-class Ideas extends Component {
+class DataIdeas extends Component {
 
   static navigationOptions = {
-    title: 'Ideas and Events',
+    title: 'Ideas',
     headerStyle: {
       backgroundColor: "#18D470",
     },
@@ -18,20 +18,56 @@ class Ideas extends Component {
   constructor(props){
     super(props);
 
-    this.ideas = props.navigation.state.params.ideas;
+    this.state = {
+      ideas: []
+    }
+
+    this.loadIdeas();
+    
   }
+
+  saveIdeas = () => {
+    AsyncStorage.setItem("Ideas", JSON.stringify(this.state.ideas));
+  }
+
+  loadIdeas = () => {
+    AsyncStorage.getItem("Ideas", (err, data) => {
+      if (err){
+        console.error('Error loading ideas', err);
+      } else {
+        let ideasList = JSON.parse(data);
+        if(ideasList === null || ideasList === undefined){
+          ideasList = [];
+        }
+        this.setState({ideas: ideasList});
+      }
+      
+    });
   
+  }
+
+
+  exportData = (idea) => {
+    // create excel sheet for idea
+    return (idea);
+  }
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.ideaContainer}>
-        <ScrollView>
-          {this.ideas.map((idea) => {
-            return (<ListItem item={idea} key={idea.id}></ListItem>)
-          })}
-          
-        </ScrollView>
-        <Footer></Footer>
+        <FlatList data={this.state.ideas} 
+                  keyExtractor={(idea, index) => { return (idea.id)}}
+                  renderItem={(idea) => (
+          <TouchableOpacity  onPress={() => navigate("dataIdeaDetail", {"idea": idea})}>
+            <DataItem item={idea}
+                      removeItem={this.removeidea}
+                      
+              ></DataItem>
+            </TouchableOpacity>
+        )}>
+
+        </FlatList>
       </View>
     );
   }
@@ -40,8 +76,8 @@ class Ideas extends Component {
 const styles = StyleSheet.create({
   ideaContainer:{
     flex: 1,
-    backgroundColor: "#373737"
+    backgroundColor: "#47494B"
   }
 })
 
-export {Ideas};
+export {DataIdeas};

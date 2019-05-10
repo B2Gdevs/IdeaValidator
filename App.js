@@ -16,7 +16,9 @@ import {IdeaDetail} from './components/ideaDetail';
 import {FeatureDetail} from './components/featureDetail';
 // import {Ideas} from './components/dataideas';
 import {DataFeatures} from './components/datafeatures';
+import {DataIdeas} from './components/dataideas';
 import {DataFeatureDetail} from './components/dataFeatureDetail';
+import {DataIdeaDetail} from './components/dataIdeaDetail';
 
 class Home extends Component {
 
@@ -81,7 +83,6 @@ class Home extends Component {
     );
   }
 }
-import { from } from 'rxjs';
 
 const styles = StyleSheet.create({
   container: {
@@ -145,10 +146,12 @@ const MainNavigator = createStackNavigator({
   Ideas: {screen: Ideas},
   Features: {screen: Features},
   Data: {screen: Data},
-  dataFeatures: {screen: DataFeatures},
   ideaDetail: {screen: IdeaDetail},
   featureDetail: {screen: FeatureDetail},
-  dataFeatureDetail: {screen: DataFeatureDetail}
+  dataFeatures: {screen: DataFeatures},
+  dataIdeas: {screen: DataIdeas},
+  dataFeatureDetail: {screen: DataFeatureDetail},
+  dataIdeaDetail: {screen: DataIdeaDetail}
 },
 {
   headerLayoutPreset: 'center'

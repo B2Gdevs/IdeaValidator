@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, Text, View, Alert} from 'react-native';
 import {Icon} from 'react-native-elements';
+
 
 class ListItem extends Component {
 
@@ -8,7 +9,19 @@ class ListItem extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{this.props.item.item.title}</Text>
-        <Icon raised onPress={() => {this.props.removeItem(this.props.item.item)}} name="trash" type="font-awesome" color="#f50"></Icon>
+        <Icon raised onPress={() => {
+          Alert.alert(
+            "Delete Item",
+            `Are you sure you want to delete ${this.props.item.item.title}?`,
+            [
+              {text: "Yes",
+               onPress: () => {this.props.removeItem(this.props.item.item)}},
+              {text: "No",
+              onPress: () => {}}
+            ]
+          )
+          ;
+          }} name="trash" type="font-awesome" color="#f50"></Icon>
       </View>
 
     );

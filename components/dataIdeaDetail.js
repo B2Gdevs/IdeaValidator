@@ -25,7 +25,7 @@ const DismissKeyboard = ({ children }) =>{
   )
 }
 
-class DataFeatureDetail extends Component {
+class DataIdeaDetail extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
@@ -41,7 +41,7 @@ class DataFeatureDetail extends Component {
 
   componentWillMount(){
     this.props.navigation.setParams({
-      title: this.props.navigation.state.params.feature.item.title
+      title: this.props.navigation.state.params.idea.item.title
     }
 )
   }
@@ -49,7 +49,7 @@ class DataFeatureDetail extends Component {
   constructor(props){
     super(props);
     this.state = {
-      feature: props.navigation.state.params.feature.item,
+      idea: props.navigation.state.params.idea.item,
       selectedInterestIndex: 0,
       note: null,
       email: null
@@ -70,20 +70,22 @@ class DataFeatureDetail extends Component {
 
 
 
-
-
   mail = () => {
 
-    let body = "Notes:\n\n\n";
+    let body = "Emails:\n\n\n";
 
-    this.state.feature.notes.forEach(note => {
+    this.state.idea.waitList.forEach(email => {
+      body += `${email}\n\n`;
+    });
+
+    body += "Notes:\n\n\n";
+
+    this.state.idea.notes.forEach(note => {
       body += `${note}\n\n`;
     });
 
-
-    
     Mailer.mail({
-      subject: `Feature: ${this.state.feature.title}`,
+      subject: `Idea: ${this.state.idea.title}`,
       body: body,
       isHTML: false,
     }, (error, event) => {
@@ -108,13 +110,13 @@ class DataFeatureDetail extends Component {
         <ScrollView contentContainerStyle={styles.flexOne}  > 
           <DismissKeyboard>
             <View style={styles.container}>
-              <Text style={styles.label}>Feature Title</Text>
+              <Text style={styles.label}>Idea Title</Text>
 
               {/* Inputs */}
               <View style={styles.input}>
                 <TextInput  style={styles.inputText} 
                             editable={false}
-                            autoCapitalize="words">{this.state.feature.title}</TextInput>
+                            autoCapitalize="words">{this.state.idea.title}</TextInput>
               </View>
 
               <View style={styles.horizontal}>
@@ -124,9 +126,9 @@ class DataFeatureDetail extends Component {
                   <Text style={styles.veryInterested}>Very Interested: </Text>
                 </View>
                 <View style={{marginLeft: 15}}>
-                  <Text style={styles.notInterested}>{this.state.feature.notInterestedCount}</Text>
-                  <Text style={styles.interested}>{this.state.feature.interestedCount}</Text>
-                  <Text style={styles.veryInterested}>{this.state.feature.veryInterestedCount}</Text>
+                  <Text style={styles.notInterested}>{this.state.idea.notInterestedCount}</Text>
+                  <Text style={styles.interested}>{this.state.idea.interestedCount}</Text>
+                  <Text style={styles.veryInterested}>{this.state.idea.veryInterestedCount}</Text>
                 </View>
               </View>
 
@@ -229,4 +231,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export {DataFeatureDetail};
+export {DataIdeaDetail};
