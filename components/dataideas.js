@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, FlatList, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {DataItem} from './dataItem';
 
@@ -76,7 +76,7 @@ class DataIdeas extends Component {
 const styles = StyleSheet.create({
   ideaContainer:{
     flex: 1,
-    backgroundColor: "#47494B"
+    backgroundColor: "#373737"
   }
 })
 

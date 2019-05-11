@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {View, TextInput, Button, Text, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {View, TextInput, Text, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import uuid from 'uuid';
+import {Button} from 'react-native-elements';
 
 let textColor = "white";
 
@@ -70,7 +71,7 @@ class IdeaModal extends Component {
           <View style={styles.horizontal}>
             <View style={styles.button}>
               <Button title="Add"
-                      color="#18D470"
+                      buttonStyle={{backgroundColor: "#18D470"}}
                       onPress={() => {
                         this.props.addItem(this.state);
                         this.resetState();
@@ -79,7 +80,7 @@ class IdeaModal extends Component {
             </View>
             <View style={styles.button}>
               <Button title="Cancel"
-                      color="#C82333"
+                      buttonStyle={{backgroundColor: "#C82333"}}
                       onPress={() => {
                         this.resetState();
                         this.props.setModalVisible(false);

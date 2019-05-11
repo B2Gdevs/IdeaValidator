@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text,
-       TextInput, Button, Keyboard,
+       TextInput, Keyboard,
        TouchableWithoutFeedback, KeyboardAvoidingView, Platform,
        ScrollView} from 'react-native';
-import {ButtonGroup} from 'react-native-elements';
+import {ButtonGroup, Button} from 'react-native-elements';
 
 //  Common variables.
 let textColor = "white";
@@ -131,7 +131,8 @@ class IdeaDetail extends Component {
             {/* Submitting and cancel buttons */}
             <View style={styles.horizontal}>
               <View style={styles.button}>
-                <Button title="Add Feedback"
+                <Button buttonStyle={styles.feedBack}
+                        title="Add Feedback"
                         color="#18D470"
                         onPress={() => {
                           let string = this.getInterestString(this.state.selectedInterestIndex);
@@ -207,6 +208,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#717171"
   },
   selectedInterested:{
+    backgroundColor: "#18D470"
+  },
+  feedBack:{
     backgroundColor: "#18D470"
   }
 });
