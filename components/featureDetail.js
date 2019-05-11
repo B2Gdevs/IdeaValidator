@@ -99,7 +99,7 @@ class FeatureDetail extends Component {
                 selectedIndex={this.state.selectedInterestIndex}
                 buttonStyle={styles.interestedButtons}
                 selectedButtonStyle={styles.selectedInterested}
-                textStyle={{color: textColor}}
+                textStyle={styles.interestedText}
                 containerStyle={styles.interestedContainer}
                 innerBorderStyle={styles.interestedBorder}
               />
@@ -207,7 +207,11 @@ const styles = StyleSheet.create({
   },
   feedBack:{
     backgroundColor: "#18D470"
-  }
+  },
+  interestedText:{
+    fontSize: Platform.OS === 'ios' ? 10 :15,
+    color: textColor
+  } 
 });
 
 export {FeatureDetail};
