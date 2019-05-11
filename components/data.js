@@ -1,7 +1,21 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
+let textColor = "white";
+
 class Data extends Component {
+
+  static navigationOptions = ({ navigation }) => ({
+    title: "Data",
+    headerStyle: {
+      backgroundColor: "#18D470",
+      
+    },
+    headerTitleStyle:{
+      color: textColor
+    }
+  })
+
   render() {
     const {navigate} = this.props.navigation;
     return (

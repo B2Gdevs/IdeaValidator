@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text,
-       TextInput, Button, Keyboard,
+       TextInput, Keyboard,
        TouchableWithoutFeedback, KeyboardAvoidingView, Platform,
        ScrollView} from 'react-native';
-import * as RNFS from 'react-native-fs';
-import {join} from 'path';
+import {Button} from 'react-native-elements';
 import Mailer from 'react-native-mail';
-import XLSX from 'xlsx';
+
 
 
 //  Common variables.
@@ -115,8 +114,7 @@ class DataIdeaDetail extends Component {
               {/* Inputs */}
               <View style={styles.input}>
                 <TextInput  style={styles.inputText} 
-                            editable={false}
-                            autoCapitalize="words">{this.state.idea.title}</TextInput>
+                            editable={false}>{this.state.idea.title.toUpperCase()}</TextInput>
               </View>
 
               <View style={styles.horizontal}>
@@ -124,11 +122,15 @@ class DataIdeaDetail extends Component {
                   <Text style={styles.notInterested}>Not Interested: </Text>
                   <Text style={styles.interested}>Interested: </Text>
                   <Text style={styles.veryInterested}>Very Interested: </Text>
+                  <Text style={styles.waitList}>WaitList Count: </Text>
+                  <Text style={styles.notes}>Note Count: </Text>
                 </View>
                 <View style={{marginLeft: 15}}>
                   <Text style={styles.notInterested}>{this.state.idea.notInterestedCount}</Text>
                   <Text style={styles.interested}>{this.state.idea.interestedCount}</Text>
                   <Text style={styles.veryInterested}>{this.state.idea.veryInterestedCount}</Text>
+                  <Text style={styles.waitList}>{this.state.idea.waitList.length}</Text>
+                  <Text style={styles.notes}>{this.state.idea.notes.length}</Text>
                 </View>
               </View>
 
@@ -136,7 +138,7 @@ class DataIdeaDetail extends Component {
               <View style={{justifyContent: "center", alignItems: "center"}}>
                 <View style={styles.button}>
                   <Button title="Export Data"
-                          color="#18D470"
+                          buttonStyle={{backgroundColor:"#18D470"}}
                           onPress={() => {
                             // this.saveData();
                             this.mail();
@@ -184,7 +186,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   inputText:{
-    color: textColor
+    color: textColor,
+    padding: 5,
+    textAlign: "center",
+    fontSize: 20
   },
   button:{
     width:"70%"
@@ -226,6 +231,16 @@ const styles = StyleSheet.create({
   },
   veryInterested:{
     color: "green",
+    fontSize: fontSize,
+    marginTop: 5
+  },
+  waitList:{
+    color: "blue",
+    fontSize: fontSize,
+    marginTop: 5
+  },
+  notes:{
+    color: "black",
     fontSize: fontSize,
     marginTop: 5
   }

@@ -1,21 +1,15 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text,
-       TextInput, Button, Keyboard,
+       TextInput, Keyboard,
        TouchableWithoutFeedback, KeyboardAvoidingView, Platform,
        ScrollView} from 'react-native';
-import * as RNFS from 'react-native-fs';
-import {join} from 'path';
-import Mailer from 'react-native-mail';
-import XLSX from 'xlsx';
 
+import {Button} from 'react-native-elements';
+import Mailer from 'react-native-mail';
 
 //  Common variables.
 let textColor = "white";
 let fontSize = 25;
-
-// Export Path
-// let exportPath = join(RNFS.ExternalStorageDirectoryPath,"some_folder", "export.xlsx");
-
 
 const DismissKeyboard = ({ children }) =>{
   return(
@@ -68,10 +62,6 @@ class DataFeatureDetail extends Component {
     }
   }
 
-
-
-
-
   mail = () => {
 
     let body = "Notes:\n\n\n";
@@ -81,7 +71,6 @@ class DataFeatureDetail extends Component {
     });
 
 
-    
     Mailer.mail({
       subject: `Feature: ${this.state.feature.title}`,
       body: body,
@@ -122,11 +111,13 @@ class DataFeatureDetail extends Component {
                   <Text style={styles.notInterested}>Not Interested: </Text>
                   <Text style={styles.interested}>Interested: </Text>
                   <Text style={styles.veryInterested}>Very Interested: </Text>
+                  <Text style={styles.notes}>Note Count: </Text>
                 </View>
                 <View style={{marginLeft: 15}}>
                   <Text style={styles.notInterested}>{this.state.feature.notInterestedCount}</Text>
                   <Text style={styles.interested}>{this.state.feature.interestedCount}</Text>
                   <Text style={styles.veryInterested}>{this.state.feature.veryInterestedCount}</Text>
+                  <Text style={styles.notes}>{this.state.feature.notes.length}</Text>
                 </View>
               </View>
 
@@ -134,11 +125,9 @@ class DataFeatureDetail extends Component {
               <View style={{justifyContent: "center", alignItems: "center"}}>
                 <View style={styles.button}>
                   <Button title="Export Data"
-                          color="#18D470"
+                          buttonStyle={{backgroundColor:"#18D470"}}
                           onPress={() => {
-                            // this.saveData();
                             this.mail();
-                            // this.creatExcel()
                           }}
                   ></Button>
                 </View>
@@ -182,7 +171,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   inputText:{
-    color: textColor
+    color: textColor,
+    padding: 5,
+    textAlign: "center",
+    fontSize: 20
   },
   button:{
     width:"70%"
@@ -224,6 +216,11 @@ const styles = StyleSheet.create({
   },
   veryInterested:{
     color: "green",
+    fontSize: fontSize,
+    marginTop: 5
+  },
+  notes:{
+    color: "black",
     fontSize: fontSize,
     marginTop: 5
   }

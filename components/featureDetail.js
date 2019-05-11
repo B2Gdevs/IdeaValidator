@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#18D470"
   },
   interestedText:{
-    fontSize: Platform.OS === 'ios' ? 10 :15,
+    fontSize: Platform.OS === 'ios' ? 13 :15,
     color: textColor
   } 
 });

@@ -98,7 +98,7 @@ class IdeaDetail extends Component {
               selectedIndex={this.state.selectedInterestIndex}
               buttonStyle={styles.interestedButtons}
               selectedButtonStyle={styles.selectedInterested}
-              textStyle={{color: textColor}}
+              textStyle={styles.interestedText}
               containerStyle={styles.interestedContainer}
               innerBorderStyle={styles.interestedBorder}
             />
@@ -181,7 +181,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   inputText:{
-    color: textColor
+    color: textColor,
+    padding: 5
   },
   button:{
     width:"70%"
@@ -199,7 +200,9 @@ const styles = StyleSheet.create({
   },
   interestedContainer:{
     borderWidth: 0,
-    marginTop: 25
+    marginTop: 25,
+    marginLeft: 15,
+    marginRight: 15
   },
   interestedBorder:{
     color: "#373737"
@@ -212,7 +215,11 @@ const styles = StyleSheet.create({
   },
   feedBack:{
     backgroundColor: "#18D470"
-  }
+  },
+  interestedText:{
+    fontSize: Platform.OS === 'ios' ? 13 :15,
+    color: textColor
+  } 
 });
 
 export {IdeaDetail};
