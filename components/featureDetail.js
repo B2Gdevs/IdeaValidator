@@ -170,7 +170,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   inputText:{
-    color: textColor
+    color: textColor,
+    padding: 5
   },
   button:{
     width:"70%"
@@ -188,7 +189,9 @@ const styles = StyleSheet.create({
   },
   interestedContainer:{
     borderWidth: 0,
-    marginTop: 25
+    marginTop: 25,
+    marginLeft: 15,
+    marginRight: 15
   },
   interestedBorder:{
     color: "#373737"
