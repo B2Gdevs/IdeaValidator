@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {ListItem} from './listItem';
 import {Footer} from './listscreenfooter';
 
+let textColor = "white";
 class Features extends Component {
 
   static navigationOptions = {
@@ -14,6 +15,7 @@ class Features extends Component {
     headerTitleStyle:{
       color: "white"
     },
+    headerTintColor: textColor
   }
 
   constructor(props){

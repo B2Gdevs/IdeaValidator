@@ -25,7 +25,8 @@ class IdeaDetail extends Component {
     },
     headerTitleStyle:{
       color: textColor
-    }
+    },
+    headerTintColor: textColor
     
   })
 

@@ -26,7 +26,8 @@ class FeatureDetail extends Component {
     },
     headerTitleStyle:{
       color: textColor
-    }
+    },
+    headerTintColor: textColor
     
   })
 

@@ -3,6 +3,8 @@ import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {DataItem} from './dataItem';
 
+let textColor = "white";
+
 class DataIdeas extends Component {
 
   static navigationOptions = {
@@ -13,6 +15,7 @@ class DataIdeas extends Component {
     headerTitleStyle:{
       color: "white"
     },
+    headerTintColor: textColor
   }
 
   constructor(props){

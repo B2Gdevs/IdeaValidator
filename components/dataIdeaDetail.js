@@ -34,7 +34,8 @@ class DataIdeaDetail extends Component {
     },
     headerTitleStyle:{
       color: textColor
-    }
+    },
+    headerTintColor: textColor
     
   })
 

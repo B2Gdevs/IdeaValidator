@@ -9,11 +9,11 @@ class Data extends Component {
     title: "Data",
     headerStyle: {
       backgroundColor: "#18D470",
-      
     },
     headerTitleStyle:{
       color: textColor
-    }
+    },
+    headerTintColor: textColor
   })
 
   render() {
