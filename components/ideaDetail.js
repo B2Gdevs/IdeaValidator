@@ -136,8 +136,12 @@ class IdeaDetail extends Component {
                         title="Add Feedback"
                         color="#18D470"
                         onPress={() => {
-                          let string = this.getInterestString(this.state.selectedInterestIndex);
-                          string = string.concat(this.state.note);
+                          let string = '';
+                          if (this.state.note !== '' && this.state.note !== null)
+                          {
+                            string = this.getInterestString(this.state.selectedInterestIndex);
+                            string = string.concat(this.state.note);
+                          }
                           this.props.navigation.state.params.updateIdea(this.state.idea, string, this.state.email, this.state.selectedInterestIndex);
                           this.props.navigation.goBack();
                         }}

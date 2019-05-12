@@ -2,19 +2,13 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text,
        TextInput, Keyboard,
        TouchableWithoutFeedback, KeyboardAvoidingView, Platform,
-       ScrollView} from 'react-native';
+       ScrollView, Alert} from 'react-native';
 import {Button} from 'react-native-elements';
 import Mailer from 'react-native-mail';
-
-
 
 //  Common variables.
 let textColor = "white";
 let fontSize = 25;
-
-// Export Path
-// let exportPath = join(RNFS.ExternalStorageDirectoryPath,"some_folder", "export.xlsx");
-
 
 const DismissKeyboard = ({ children }) =>{
   return(
@@ -89,15 +83,10 @@ class DataIdeaDetail extends Component {
       body: body,
       isHTML: false,
     }, (error, event) => {
-      Alert.alert(
-        error,
-        event,
-        [
-          {text: 'Ok', onPress: () => console.log('OK: Email Error Response')},
-          {text: 'Cancel', onPress: () => console.log('CANCEL: Email Error Response')}
-        ],
-        { cancelable: true }
-      )
+      if(error)
+        console.log(error);
+      else
+        console.log(event);
     });
   }
 
@@ -141,9 +130,16 @@ class DataIdeaDetail extends Component {
                   <Button title="Export Data"
                           buttonStyle={{backgroundColor:"#18D470"}}
                           onPress={() => {
-                            // this.saveData();
-                            this.mail();
-                            // this.creatExcel()
+                            Alert.alert(
+                              "Export Notes and Wait List to Email",
+                              `This will create a list of notes and the waitlist in the body of an email.  Continue?`,
+                              [
+                                {text: "Yes",
+                                 onPress: () => {this.mail()}},
+                                {text: "No",
+                                onPress: () => {}}
+                              ]
+                            )
                           }}
                   ></Button>
                 </View>
@@ -221,27 +217,27 @@ const styles = StyleSheet.create({
     flex:1
   },
   interested:{
-    color: "yellow",
+    color: "#12EAEA",
     fontSize: fontSize,
     marginTop: 5
   },
   notInterested:{
-    color: "red",
+    color: "#AF3B6E",
     fontSize: fontSize,
     marginTop: 5
   },
   veryInterested:{
-    color: "green",
+    color: "#18D470",
     fontSize: fontSize,
     marginTop: 5
   },
   waitList:{
-    color: "blue",
+    color: "#D3BCC0",
     fontSize: fontSize,
     marginTop: 5
   },
   notes:{
-    color: "black",
+    color: "#D3BCC0",
     fontSize: fontSize,
     marginTop: 5
   }

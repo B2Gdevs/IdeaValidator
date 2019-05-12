@@ -1,13 +1,13 @@
-package com.helloworld;
+package com.ideavalidator;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.chirag.RNMail.*;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.chirag.RNMail.RNMail;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.rnfs.RNFSPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -28,11 +28,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNMail(),
-            new RNFSPackage(),
-            new AsyncStoragePackage(),
             new VectorIconsPackage(),
-            new RNGestureHandlerPackage()
+            new RNMail(),
+            new RNGestureHandlerPackage(),
+            new RNFSPackage(),
+            new AsyncStoragePackage()
       );
     }
 
