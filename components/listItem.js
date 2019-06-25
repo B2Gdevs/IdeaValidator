@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, Alert} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-
+/**
+ * ListItem is the component that is rendered in the features and ideas 
+ * components.  It is used to populate the listview (FlatList) in those
+ * components.
+ */
 class ListItem extends Component {
 
   render() {
@@ -19,8 +23,7 @@ class ListItem extends Component {
               {text: "No",
               onPress: () => {}}
             ]
-          )
-          ;
+          );
           }} name="trash" type="font-awesome" color="#f50"></Icon>
       </View>
 

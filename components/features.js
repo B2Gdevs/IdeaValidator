@@ -5,6 +5,11 @@ import {ListItem} from './listItem';
 import {Footer} from './listscreenfooter';
 
 let textColor = "white";
+
+/**
+ * This component displays the list of features to select from which
+ * will then take the user to the feature detail.
+ */
 class Features extends Component {
 
   static navigationOptions = {

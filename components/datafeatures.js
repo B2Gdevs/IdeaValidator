@@ -5,6 +5,10 @@ import {DataItem} from './dataItem';
 
 let textColor = "white";
 
+/**
+ * This component displays the list of features to choose from which provide 
+ * the data analytics of the feature.
+ */
 class DataFeatures extends Component {
 
   static navigationOptions = {
@@ -46,13 +50,6 @@ class DataFeatures extends Component {
       }
       
     });
-  
-  }
-
-
-  exportData = (feature) => {
-    // create excel sheet for feature
-    return (feature);
   }
 
   render() {

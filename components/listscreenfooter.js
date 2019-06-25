@@ -5,6 +5,10 @@ import uuid from 'uuid';
 import {IdeaModal} from './ideaModal';
 import {FeatureModal} from './featureModal';
 
+/**
+ * Footer is the component which allows the user to add features and ideas
+ * to the features and ideas lists.
+ */
 class Footer extends Component {
 
   constructor(props){

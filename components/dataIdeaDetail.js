@@ -10,6 +10,10 @@ import Mailer from 'react-native-mail';
 let textColor = "white";
 let fontSize = 25;
 
+/**
+ * DismissKeyboard is a functional component that is used to dismiss the 
+ * keyboard whenever a user touches out of the keyboards view.
+ */
 const DismissKeyboard = ({ children }) =>{
   return(
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -18,6 +22,12 @@ const DismissKeyboard = ({ children }) =>{
   )
 }
 
+/**
+ * DataIdeaDetail is the component that a user will see that displays more
+ * information about an idea in the context of data analysis.  It is what 
+ * pops up when a user selects a list item from the listview. The feedback
+ * data like notes will need to be exported via email.
+ */
 class DataIdeaDetail extends Component {
 
   static navigationOptions = ({ navigation }) => ({
@@ -36,34 +46,22 @@ class DataIdeaDetail extends Component {
   componentWillMount(){
     this.props.navigation.setParams({
       title: this.props.navigation.state.params.idea.item.title
-    }
-)
+    })
   }
 
   constructor(props){
     super(props);
     this.state = {
       idea: props.navigation.state.params.idea.item,
-      selectedInterestIndex: 0,
       note: null,
       email: null
     }
   }
 
-  updateIndex = (selectedIndex) => {
-    this.setState({selectedInterestIndex: selectedIndex});
-  }
-
-  getInterestString = (selectedIndex) => {
-    switch(selectedIndex){
-      case 0: return ("Rating: Not Interested.\n");
-      case 1: return ("Rating: Interested.\n");
-      case 2: return ("Rating: Very Interested.\n");
-    }
-  }
-
-
-
+  /**
+   * mail will open the users defualt mail app and compose a message with
+   * the data as the body of the message.
+   */
   mail = () => {
 
     let body = "Emails:\n\n\n";

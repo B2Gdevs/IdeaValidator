@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
+import {StyleSheet, Text, View} from 'react-native';
 
+/**
+ * DataItem is similar to the ListItem component, but without a way to delete
+ * an item.  That action is handled at where the features or ideas are created.
+ */
 class DataItem extends Component {
 
   render() {

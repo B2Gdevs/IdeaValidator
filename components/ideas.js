@@ -5,6 +5,11 @@ import {ListItem} from './listItem';
 import {Footer} from './listscreenfooter';
 
 let textColor = "white";
+
+/**
+ * This component displays the list of ideas to select from which
+ * will then take the user to the ideas detail.
+ */
 class Ideas extends Component {
 
   static navigationOptions = {

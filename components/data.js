@@ -3,6 +3,10 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 let textColor = "white";
 
+/**
+ * Data is the component that displays the navigation options to either the
+ * data for the features or ideas.
+ */
 class Data extends Component {
 
   static navigationOptions = ({ navigation }) => ({

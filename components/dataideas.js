@@ -5,6 +5,10 @@ import {DataItem} from './dataItem';
 
 let textColor = "white";
 
+/**
+ * This component displays the list of ideas to choose from which provide the
+ * data analytics of the feature.
+ */
 class DataIdeas extends Component {
 
   static navigationOptions = {
@@ -47,12 +51,6 @@ class DataIdeas extends Component {
       
     });
   
-  }
-
-
-  exportData = (idea) => {
-    // create excel sheet for idea
-    return (idea);
   }
 
   render() {

@@ -5,6 +5,10 @@ import {Button} from 'react-native-elements';
 
 let textColor = "white";
 
+/**
+ * DismissKeyboard is a functional component that is used to dismiss the 
+ * keyboard whenever a user touches out of the keyboards view.
+ */
 const DismissKeyboard = ({ children }) =>{
   return(
   <TouchableWithoutFeedback style={{flex: 1}} onPress={() => Keyboard.dismiss()}>
@@ -13,6 +17,9 @@ const DismissKeyboard = ({ children }) =>{
   )
 }
 
+/**
+ * The pop up modal that is used to create a new feature.
+ */
 class IdeaModal extends Component {
 
   constructor(props){

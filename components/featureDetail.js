@@ -8,6 +8,10 @@ import {ButtonGroup, Button} from 'react-native-elements';
 //  Common variables.
 let textColor = "white";
 
+/**
+ * DismissKeyboard is a functional component that is used to dismiss the 
+ * keyboard whenever a user touches out of the keyboards view.
+ */
 const DismissKeyboard = ({ children }) =>{
   return(
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -16,6 +20,11 @@ const DismissKeyboard = ({ children }) =>{
   )
 }
 
+/**
+ * FeatureDetail is the component that a user will see that displays more
+ * information about a feature such as the description and then the user will
+ * will collect data on that feature from this component.  
+ */
 class FeatureDetail extends Component {
 
   static navigationOptions = ({ navigation }) => ({
@@ -48,6 +57,7 @@ class FeatureDetail extends Component {
     }
   }
 
+  // updates the index of the interest level the user has selected.
   updateIndex = (selectedIndex) => {
     this.setState({selectedInterestIndex: selectedIndex});
   }
